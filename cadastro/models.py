@@ -1,26 +1,27 @@
 from django.db import models
 
 class Estudante(models.Model):
-    nome = models.CharField (max_length = 100, null = False, blank = False)
-    cpf = models.CharField (max_length = 11, unique = True, null = False, blank = False, primary_key=True)
-    email = models.EmailField (unique = True, null=False, blank=False)
-    data_nascimento = models.DateField(null=False, blank=False)
-    endereco = models.CharField(max_length = 255)
-    telefone = models.CharField(max_length=14, null=False, blank=False)
-    
+    nome = models.CharField(max_length = 100)
+    email = models.EmailField(blank = False, max_length = 30)
+    cpf = models.CharField(max_length = 11)
+    data_nascimento = models.DateField()
+    celular = models.CharField(max_length = 14)
+    adress = models.CharField(max_length=300, blank=True, null=True)
+
     def __str__(self):
-     return self.nome
+        return self.nome
 
 class Curso(models.Model):
-   nivel = (
-      ('B', 'Básico'),
-      ('I', 'Intermediário'),
-      ('A', 'Avançado'),
-   )
-   codigo = models.CharField(max_length=14, null=False, blank=False)
-   descricao = models.CharField(max_length=500, null=False, blank=False)
-   nivel = models.CharField(max_length=1, choices=nivel, blank=False)
-   null = False, default = 'B'
-   
-   def __str__(self):
-      return self.codigo
+    NIVEL = (
+        ('B','Básico'),
+        ('I','Intermediário'),
+        ('A','Avançado'),
+    ) 
+    codigo = models.CharField(max_length = 10)
+    nome = models.CharField(max_length = 100)
+    descricao = models.CharField(max_length = 100, blank = False)
+    nivel = models.CharField(max_length = 1, choices = NIVEL, blank = False, 
+    null = False, default = 'B')
+
+    def __str__(self):
+        return self.codigo
